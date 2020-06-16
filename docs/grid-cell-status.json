@@ -1,0 +1,24 @@
+{
+  "version": "experimental",
+  "tags": [
+    {
+      "name": "grid-cell-status",
+      "path": "./../src/grid/grid-cell-status.js",
+      "attributes": [
+        {
+          "name": "value",
+          "description": "`value` value to display",
+          "type": "string"
+        }
+      ],
+      "properties": [
+        {
+          "name": "value",
+          "attribute": "value",
+          "description": "`value` value to display",
+          "type": "string"
+        }
+      ]
+    }
+  ]
+}

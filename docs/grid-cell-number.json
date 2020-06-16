@@ -1,0 +1,58 @@
+{
+  "version": "experimental",
+  "tags": [
+    {
+      "name": "grid-cell-number",
+      "path": "./../src/grid/grid-cell-number.js",
+      "attributes": [
+        {
+          "name": "value",
+          "description": "`value` value to display",
+          "type": "string"
+        },
+        {
+          "name": "scale",
+          "description": "`scale` d3.scale"
+        },
+        {
+          "name": "scaleColor"
+        },
+        {
+          "name": "backgroundScaleColor"
+        },
+        {
+          "name": "format",
+          "description": "`format` value to be sent to d3.format",
+          "type": "string"
+        }
+      ],
+      "properties": [
+        {
+          "name": "value",
+          "attribute": "value",
+          "description": "`value` value to display",
+          "type": "string"
+        },
+        {
+          "name": "scale",
+          "attribute": "scale",
+          "description": "`scale` d3.scale"
+        },
+        {
+          "name": "scaleColor",
+          "attribute": "scaleColor"
+        },
+        {
+          "name": "backgroundScaleColor",
+          "attribute": "backgroundScaleColor"
+        },
+        {
+          "name": "format",
+          "attribute": "format",
+          "description": "`format` value to be sent to d3.format",
+          "type": "string"
+        }
+      ]
+    }
+  ]
+}

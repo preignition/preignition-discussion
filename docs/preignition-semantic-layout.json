@@ -1,0 +1,61 @@
+{
+  "version": "experimental",
+  "tags": [
+    {
+      "name": "preignition-semantic-layout",
+      "path": "./../src/layout/semantic-layout.js",
+      "description": "# preignition-semantic-layout\n\nA responsive layout using semantic tag,",
+      "attributes": [
+        {
+          "name": "no-header",
+          "description": "true to hide header",
+          "type": "Boolean"
+        },
+        {
+          "name": "no-footer",
+          "description": "true to hide footer",
+          "type": "Boolean"
+        },
+        {
+          "name": "no-aside",
+          "description": "true to hide aside",
+          "type": "Boolean"
+        }
+      ],
+      "properties": [
+        {
+          "name": "noHeader",
+          "attribute": "no-header",
+          "description": "true to hide header",
+          "type": "Boolean"
+        },
+        {
+          "name": "noFooter",
+          "attribute": "no-footer",
+          "description": "true to hide footer",
+          "type": "Boolean"
+        },
+        {
+          "name": "noAside",
+          "attribute": "no-aside",
+          "description": "true to hide aside",
+          "type": "Boolean"
+        }
+      ],
+      "slots": [
+        {
+          "name": "header",
+          "description": "header slot"
+        },
+        {
+          "name": "aside",
+          "description": "aside slot"
+        },
+        {
+          "name": "footer",
+          "description": "footer slot"
+        }
+      ]
+    }
+  ]
+}

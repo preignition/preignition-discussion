@@ -1,0 +1,26 @@
+{
+  "imports": {
+    "@material/mwc-button": "./@material/mwc-button.js",
+    "@material/mwc-formfield": "./@material/mwc-formfield.js",
+    "@material/mwc-icon-button": "./@material/mwc-icon-button.js",
+    "@material/mwc-tab": "./@material/mwc-tab.js",
+    "@material/mwc-tab-bar": "./@material/mwc-tab-bar.js",
+    "@material/mwc-textarea": "./@material/mwc-textarea.js",
+    "@material/mwc-textfield": "./@material/mwc-textfield.js",
+    "@morbidick/lit-element-notify": "./@morbidick/lit-element-notify.js",
+    "@preignition/lit-firebase": "./@preignition/lit-firebase.js",
+    "@preignition/preignition-demo": "./@preignition/preignition-demo.js",
+    "@preignition/preignition-mixin": "./@preignition/preignition-mixin.js",
+    "@vaadin/router": "./@vaadin/router.js",
+    "dompurify": "./dompurify.js",
+    "lit-element": "./lit-element.js",
+    "lit-html": "./lit-html.js",
+    "lit-html/directives/cache.js": "./lit-html/directives/cache.js",
+    "lit-html/directives/if-defined.js": "./lit-html/directives/if-defined.js",
+    "lit-html/directives/style-map.js": "./lit-html/directives/style-map.js",
+    "lit-html/directives/unsafe-html.js": "./lit-html/directives/unsafe-html.js",
+    "marked": "./marked.js",
+    "marked/lib/marked.esm.js": "./marked/lib/marked.esm.js",
+    "pwa-helpers/media-query.js": "./pwa-helpers/media-query.js"
+  }
+}

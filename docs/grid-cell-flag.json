@@ -1,0 +1,24 @@
+{
+  "version": "experimental",
+  "tags": [
+    {
+      "name": "grid-cell-flag",
+      "path": "./../src/grid/grid-cell-flag.js",
+      "attributes": [
+        {
+          "name": "flags",
+          "description": "`flags` flags to repeat",
+          "type": "array"
+        }
+      ],
+      "properties": [
+        {
+          "name": "flags",
+          "attribute": "flags",
+          "description": "`flags` flags to repeat",
+          "type": "array"
+        }
+      ]
+    }
+  ]
+}

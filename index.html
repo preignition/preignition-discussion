@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en-GB">
+
+<head>
+  <title>Preignition comment demo</title>
+  <!-- <base href="/demo/"> -->
+  <meta charset="utf-8">
+  
+</head>
+
+<!-- <script src="/node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script> -->
+
+<!-- import other required components -->
+<script type="importmap">
+  {
+      "imports": {
+        "@github/clipboard-copy-element": "/web_modules/@github/clipboard-copy-element.js",
+        "@morbidick/lit-element-notify": "/web_modules/@morbidick/lit-element-notify.js",
+        "@preignition/preignition-mixin": "/web_modules/@preignition/preignition-mixin.js",
+        "@preignition/preignition-demo": "/web_modules/@preignition/preignition-demo.js",
+        "@preignition/lit-firebase": "/web_modules/@preignition/lit-firebase.js",
+        "@polymer/": "/web_modules/@polymer/",
+        "@morbidick/lit-element-notify": "/web_modules/@morbidick/lit-element-notify.js",
+        "@vaadin/router": "/web_modules/@vaadin/router.js",
+        "@material/mwc-tab": "/web_modules/@material/mwc-tab.js",
+        "@material/mwc-button": "/web_modules/@material/mwc-button.js",
+        "@material/mwc-icon-button": "/web_modules/@material/mwc-icon-button.js",
+        "@material/mwc-tab-bar": "/web_modules/@material/mwc-tab-bar.js",
+        "@material/mwc-switch": "/web_modules/@material/mwc-switch.js",
+        "@material/mwc-textarea": "/web_modules/@material/mwc-textarea.js",
+        "@material/mwc-textfield": "/web_modules/@material/mwc-textfield.js",
+        "@material/mwc-formfield": "/web_modules/@material/mwc-formfield.js",
+        "@material/mwc-radio": "/web_modules/@material/mwc-radio.js",
+        "@material/mwc-linear-progress": "/web_modules/@material/mwc-linear-progress.js",
+        "pwa-helpers/media-query.js": "/web_modules/pwa-helpers/media-query.js",
+        "marked": "/web_modules/marked.js",
+        "cronstrue": "/web_modules/cronstrue.js",
+        "dompurify": "/web_modules/dompurify.js",
+        "marked/": "/web_modules/marked/",
+        "lit-element": "/web_modules/lit-element.js",
+        "lit-html": "/web_modules/lit-html.js",
+        "d3-format": "/web_modules/d3-format.js",
+        "d3-scale": "/web_modules/d3-scale.js",
+        "d3-selection": "/web_modules/d3-selection.js",
+        "lit-html/": "/web_modules/lit-html/",
+        "api-viewer-element": "/web_modules/api-viewer-element.js"
+    }
+  }
+  </script>
+<!-- <link rel="stylesheet" href="src/style/tokens.custom-properties.css" /> -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons&display=block">
+<script src="/node_modules/firebase/firebase-app.js"></script>
+<script src="/node_modules/firebase/firebase-auth.js"></script>
+<script src="/node_modules/firebase/firebase-database.js"></script>
+<script src="/node_modules/firebase/firebase-storage.js"></script>
+<script src="/initializeFirebase.js"></script>
+
+<!-- <script src="/bower_components/webcomponentsjs/webcomponents-loader.js"></script> -->
+<!-- <script src="./bower_components/webcomponentsjs/webcomponents-loader.js"></script> -->
+<!-- <link rel="import" href="./bower_components/vaadin-button/theme/material/vaadin-button.html"> -->
+<!-- <link rel="import" href="./bower_components/firebase-upload/firebase-document-upload.html"> -->
+<!-- <link rel="import" href="./bower_components/paper-tooltip/paper-tooltip.html"> -->
+<style>
+  body {
+      background: #fafafa;
+      margin: 0;
+    }
+  
+  body, html {
+   font-family: 'Roboto', 'Noto', sans-serif;
+  }
+  
+  :root {
+    --primary-color: #0277bd;
+    --light-primary-color: #58a5f0;
+    --dark-primary-color: #004c8c;
+    --primary-color-tr: #0277bd22;
+    --secondary-color: #00acc1;
+    --light-secondary-color: #5ddef4;
+    --dark-secondary-color: #007c91;
+    --secondary-color-tr: #00acc122;
+    --accent-color: #00b8d4;
+    --accent-color-tr: #00b8d422;
+    --primary-background-color: #ffffff;
+    --secondary-background-color: #b2bfcb;
+    --primary-text-color: #212121;
+    --secondary-text-color: #727272;
+    --disabled-text-color: #646464;
+    --divider-color: #b6b6b6;
+
+    --mdc-theme-primary: var(--primary-color);
+    --mdc-theme-secondary: var(--secondary-color);
+    --color-danger: #b00020;
+  }
+</style>
+
+<body>
+  <div id="demo">
+  </div>
+  <script type="module">
+    import { html, render } from 'lit-html';
+    import '/index.js';
+    import '/demo/preignition-discussion-demo.js';
+    
+
+    render(
+      html`
+        <preignition-discussion-demo></preignition-discussion-demo>          
+      `,
+      document.querySelector('#demo')
+    );
+  </script>
+</body>
+
+</html>
