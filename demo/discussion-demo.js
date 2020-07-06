@@ -34,15 +34,16 @@ class discussionDemo extends DemoBase {
       <fancy-accordion >
           
 
-          <expansion-panel >
-              <div slot="header">pwi-error-panel</div>
+          <expansion-panel opened>
+              <div slot="header">pdi-discussion</div>
               <mwc-tab-bar class="tab-bar" .activeIndex="${this.tabs.indexOf(this.activeTab)}" theme="centered">
                 <mwc-tab isMinWidthIndicator @click=${() => this.activeTab = 'intro'} label="intro"></mwc-tab>
                 <mwc-tab isMinWidthIndicator @click=${() => this.activeTab = 'api'} label="api"></mwc-tab>
             </mwc-tab-bar >
             ${this.activeTab === 'intro' ? html `
               <h2>discussion Example</h2>
-              <pco-discussion></pco-discussion>
+              <pdi-discussion></pdi-discussion>
+              <pdi-discussion id="-MAMK5DS7DfooeLtBZYZ"></pdi-discussion>
              ` : ''}
             ${this.activeTab === 'api' ? html `
               <h2>API</h2>

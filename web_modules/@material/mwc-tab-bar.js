@@ -1,13 +1,12 @@
-import { a as __extends, c as __read, b as __assign, _ as __decorate } from '../common/tslib.es6-34763f29.js';
+import { a as __extends, d as __read, b as __assign, M as MDCFoundation, _ as __decorate, m as matches } from '../common/foundation-bc699e66.js';
 import { h as html } from '../common/lit-html-ae713ed3.js';
 import { query, eventOptions, css, customElement, property } from '../lit-element.js';
 import '../common/directive-6dfed3e1.js';
-import { M as MDCFoundation, m as matches } from '../common/foundation-a9f346e5.js';
-import { B as BaseElement, a as addHasRemoveClass } from '../common/base-element-0713bcaf.js';
-import '../common/foundation-7cb9e1b5.js';
+import { B as BaseElement, b as addHasRemoveClass } from '../common/base-element-6dce937b.js';
+import '../common/foundation-84f5c8a8.js';
 import '../common/class-map-72ef267f.js';
-import { o as observer } from '../common/observer-f70e8ccc.js';
-import '../common/ripple-directive-be38b582.js';
+import { o as observer } from '../common/observer-579e419c.js';
+import '../common/ripple-directive-cbcac655.js';
 import { Tab } from './mwc-tab.js';
 
 /**
@@ -66,7 +65,7 @@ var strings = {
  */
 var MDCTabScrollerRTL = /** @class */ (function () {
     function MDCTabScrollerRTL(adapter) {
-        this.adapter_ = adapter;
+        this.adapter = adapter;
     }
     return MDCTabScrollerRTL;
 }());
@@ -99,14 +98,14 @@ var MDCTabScrollerRTLDefault = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     MDCTabScrollerRTLDefault.prototype.getScrollPositionRTL = function () {
-        var currentScrollLeft = this.adapter_.getScrollAreaScrollLeft();
+        var currentScrollLeft = this.adapter.getScrollAreaScrollLeft();
         var right = this.calculateScrollEdges_().right;
         // Scroll values on most browsers are ints instead of floats so we round
         return Math.round(right - currentScrollLeft);
     };
     MDCTabScrollerRTLDefault.prototype.scrollToRTL = function (scrollX) {
         var edges = this.calculateScrollEdges_();
-        var currentScrollLeft = this.adapter_.getScrollAreaScrollLeft();
+        var currentScrollLeft = this.adapter.getScrollAreaScrollLeft();
         var clampedScrollLeft = this.clampScrollValue_(edges.right - scrollX);
         return {
             finalScrollPosition: clampedScrollLeft,
@@ -114,7 +113,7 @@ var MDCTabScrollerRTLDefault = /** @class */ (function (_super) {
         };
     };
     MDCTabScrollerRTLDefault.prototype.incrementScrollRTL = function (scrollX) {
-        var currentScrollLeft = this.adapter_.getScrollAreaScrollLeft();
+        var currentScrollLeft = this.adapter.getScrollAreaScrollLeft();
         var clampedScrollLeft = this.clampScrollValue_(currentScrollLeft - scrollX);
         return {
             finalScrollPosition: clampedScrollLeft,
@@ -125,8 +124,8 @@ var MDCTabScrollerRTLDefault = /** @class */ (function (_super) {
         return scrollX;
     };
     MDCTabScrollerRTLDefault.prototype.calculateScrollEdges_ = function () {
-        var contentWidth = this.adapter_.getScrollContentOffsetWidth();
-        var rootWidth = this.adapter_.getScrollAreaOffsetWidth();
+        var contentWidth = this.adapter.getScrollContentOffsetWidth();
+        var rootWidth = this.adapter.getScrollAreaOffsetWidth();
         return {
             left: 0,
             right: contentWidth - rootWidth,
@@ -167,11 +166,11 @@ var MDCTabScrollerRTLNegative = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     MDCTabScrollerRTLNegative.prototype.getScrollPositionRTL = function (translateX) {
-        var currentScrollLeft = this.adapter_.getScrollAreaScrollLeft();
+        var currentScrollLeft = this.adapter.getScrollAreaScrollLeft();
         return Math.round(translateX - currentScrollLeft);
     };
     MDCTabScrollerRTLNegative.prototype.scrollToRTL = function (scrollX) {
-        var currentScrollLeft = this.adapter_.getScrollAreaScrollLeft();
+        var currentScrollLeft = this.adapter.getScrollAreaScrollLeft();
         var clampedScrollLeft = this.clampScrollValue_(-scrollX);
         return {
             finalScrollPosition: clampedScrollLeft,
@@ -179,7 +178,7 @@ var MDCTabScrollerRTLNegative = /** @class */ (function (_super) {
         };
     };
     MDCTabScrollerRTLNegative.prototype.incrementScrollRTL = function (scrollX) {
-        var currentScrollLeft = this.adapter_.getScrollAreaScrollLeft();
+        var currentScrollLeft = this.adapter.getScrollAreaScrollLeft();
         var clampedScrollLeft = this.clampScrollValue_(currentScrollLeft - scrollX);
         return {
             finalScrollPosition: clampedScrollLeft,
@@ -190,8 +189,8 @@ var MDCTabScrollerRTLNegative = /** @class */ (function (_super) {
         return scrollX - translateX;
     };
     MDCTabScrollerRTLNegative.prototype.calculateScrollEdges_ = function () {
-        var contentWidth = this.adapter_.getScrollContentOffsetWidth();
-        var rootWidth = this.adapter_.getScrollAreaOffsetWidth();
+        var contentWidth = this.adapter.getScrollContentOffsetWidth();
+        var rootWidth = this.adapter.getScrollAreaOffsetWidth();
         return {
             left: rootWidth - contentWidth,
             right: 0,
@@ -232,12 +231,12 @@ var MDCTabScrollerRTLReverse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     MDCTabScrollerRTLReverse.prototype.getScrollPositionRTL = function (translateX) {
-        var currentScrollLeft = this.adapter_.getScrollAreaScrollLeft();
+        var currentScrollLeft = this.adapter.getScrollAreaScrollLeft();
         // Scroll values on most browsers are ints instead of floats so we round
         return Math.round(currentScrollLeft - translateX);
     };
     MDCTabScrollerRTLReverse.prototype.scrollToRTL = function (scrollX) {
-        var currentScrollLeft = this.adapter_.getScrollAreaScrollLeft();
+        var currentScrollLeft = this.adapter.getScrollAreaScrollLeft();
         var clampedScrollLeft = this.clampScrollValue_(scrollX);
         return {
             finalScrollPosition: clampedScrollLeft,
@@ -245,7 +244,7 @@ var MDCTabScrollerRTLReverse = /** @class */ (function (_super) {
         };
     };
     MDCTabScrollerRTLReverse.prototype.incrementScrollRTL = function (scrollX) {
-        var currentScrollLeft = this.adapter_.getScrollAreaScrollLeft();
+        var currentScrollLeft = this.adapter.getScrollAreaScrollLeft();
         var clampedScrollLeft = this.clampScrollValue_(currentScrollLeft + scrollX);
         return {
             finalScrollPosition: clampedScrollLeft,
@@ -256,8 +255,8 @@ var MDCTabScrollerRTLReverse = /** @class */ (function (_super) {
         return scrollX + translateX;
     };
     MDCTabScrollerRTLReverse.prototype.calculateScrollEdges_ = function () {
-        var contentWidth = this.adapter_.getScrollContentOffsetWidth();
-        var rootWidth = this.adapter_.getScrollAreaOffsetWidth();
+        var contentWidth = this.adapter.getScrollContentOffsetWidth();
+        var rootWidth = this.adapter.getScrollAreaOffsetWidth();
         return {
             left: contentWidth - rootWidth,
             right: 0,
@@ -343,9 +342,9 @@ var MDCTabScrollerFoundation = /** @class */ (function (_super) {
     MDCTabScrollerFoundation.prototype.init = function () {
         // Compute horizontal scrollbar height on scroller with overflow initially hidden, then update overflow to scroll
         // and immediately adjust bottom margin to avoid the scrollbar initially appearing before JS runs.
-        var horizontalScrollbarHeight = this.adapter_.computeHorizontalScrollbarHeight();
-        this.adapter_.setScrollAreaStyleProperty('margin-bottom', -horizontalScrollbarHeight + 'px');
-        this.adapter_.addScrollAreaClass(MDCTabScrollerFoundation.cssClasses.SCROLL_AREA_SCROLL);
+        var horizontalScrollbarHeight = this.adapter.computeHorizontalScrollbarHeight();
+        this.adapter.setScrollAreaStyleProperty('margin-bottom', -horizontalScrollbarHeight + 'px');
+        this.adapter.addScrollAreaClass(MDCTabScrollerFoundation.cssClasses.SCROLL_AREA_SCROLL);
     };
     /**
      * Computes the current visual scroll position
@@ -355,7 +354,7 @@ var MDCTabScrollerFoundation = /** @class */ (function (_super) {
             return this.computeCurrentScrollPositionRTL_();
         }
         var currentTranslateX = this.calculateCurrentTranslateX_();
-        var scrollLeft = this.adapter_.getScrollAreaScrollLeft();
+        var scrollLeft = this.adapter.getScrollAreaScrollLeft();
         return scrollLeft - currentTranslateX;
     };
     /**
@@ -376,11 +375,11 @@ var MDCTabScrollerFoundation = /** @class */ (function (_super) {
         // Early exit if we aren't animating or the event was triggered by a different element.
         var evtTarget = evt.target;
         if (!this.isAnimating_ ||
-            !this.adapter_.eventTargetMatchesSelector(evtTarget, MDCTabScrollerFoundation.strings.CONTENT_SELECTOR)) {
+            !this.adapter.eventTargetMatchesSelector(evtTarget, MDCTabScrollerFoundation.strings.CONTENT_SELECTOR)) {
             return;
         }
         this.isAnimating_ = false;
-        this.adapter_.removeClass(MDCTabScrollerFoundation.cssClasses.ANIMATING);
+        this.adapter.removeClass(MDCTabScrollerFoundation.cssClasses.ANIMATING);
     };
     /**
      * Increment the scroll value by the scrollXIncrement using animation.
@@ -407,7 +406,7 @@ var MDCTabScrollerFoundation = /** @class */ (function (_super) {
             return;
         }
         this.stopScrollAnimation_();
-        this.adapter_.setScrollAreaScrollLeft(operation.finalScrollPosition);
+        this.adapter.setScrollAreaScrollLeft(operation.finalScrollPosition);
     };
     /**
      * Scrolls to the given scrollX value
@@ -431,7 +430,7 @@ var MDCTabScrollerFoundation = /** @class */ (function (_super) {
      * @return translateX value from a CSS matrix transform function string.
      */
     MDCTabScrollerFoundation.prototype.calculateCurrentTranslateX_ = function () {
-        var transformValue = this.adapter_.getScrollContentStyleValue('transform');
+        var transformValue = this.adapter.getScrollContentStyleValue('transform');
         // Early exit if no transform is present
         if (transformValue === 'none') {
             return 0;
@@ -463,8 +462,8 @@ var MDCTabScrollerFoundation = /** @class */ (function (_super) {
         return this.getRTLScroller().getScrollPositionRTL(translateX);
     };
     MDCTabScrollerFoundation.prototype.calculateScrollEdges_ = function () {
-        var contentWidth = this.adapter_.getScrollContentOffsetWidth();
-        var rootWidth = this.adapter_.getScrollAreaOffsetWidth();
+        var contentWidth = this.adapter.getScrollContentOffsetWidth();
+        var rootWidth = this.adapter.getScrollAreaOffsetWidth();
         return {
             left: 0,
             right: contentWidth - rootWidth,
@@ -522,13 +521,13 @@ var MDCTabScrollerFoundation = /** @class */ (function (_super) {
         this.stopScrollAnimation_();
         // This animation uses the FLIP approach.
         // Read more here: https://aerotwist.com/blog/flip-your-animations/
-        this.adapter_.setScrollAreaScrollLeft(animation.finalScrollPosition);
-        this.adapter_.setScrollContentStyleProperty('transform', "translateX(" + animation.scrollDelta + "px)");
+        this.adapter.setScrollAreaScrollLeft(animation.finalScrollPosition);
+        this.adapter.setScrollContentStyleProperty('transform', "translateX(" + animation.scrollDelta + "px)");
         // Force repaint
-        this.adapter_.computeScrollAreaClientRect();
+        this.adapter.computeScrollAreaClientRect();
         requestAnimationFrame(function () {
-            _this.adapter_.addClass(MDCTabScrollerFoundation.cssClasses.ANIMATING);
-            _this.adapter_.setScrollContentStyleProperty('transform', 'none');
+            _this.adapter.addClass(MDCTabScrollerFoundation.cssClasses.ANIMATING);
+            _this.adapter.setScrollContentStyleProperty('transform', 'none');
         });
         this.isAnimating_ = true;
     };
@@ -538,16 +537,16 @@ var MDCTabScrollerFoundation = /** @class */ (function (_super) {
     MDCTabScrollerFoundation.prototype.stopScrollAnimation_ = function () {
         this.isAnimating_ = false;
         var currentScrollPosition = this.getAnimatingScrollPosition_();
-        this.adapter_.removeClass(MDCTabScrollerFoundation.cssClasses.ANIMATING);
-        this.adapter_.setScrollContentStyleProperty('transform', 'translateX(0px)');
-        this.adapter_.setScrollAreaScrollLeft(currentScrollPosition);
+        this.adapter.removeClass(MDCTabScrollerFoundation.cssClasses.ANIMATING);
+        this.adapter.setScrollContentStyleProperty('transform', 'translateX(0px)');
+        this.adapter.setScrollAreaScrollLeft(currentScrollPosition);
     };
     /**
      * Gets the current scroll position during animation
      */
     MDCTabScrollerFoundation.prototype.getAnimatingScrollPosition_ = function () {
         var currentTranslateX = this.calculateCurrentTranslateX_();
-        var scrollLeft = this.adapter_.getScrollAreaScrollLeft();
+        var scrollLeft = this.adapter.getScrollAreaScrollLeft();
         if (this.isRTL_()) {
             return this.getRTLScroller().getAnimatingScrollPosition(scrollLeft, currentTranslateX);
         }
@@ -575,32 +574,32 @@ var MDCTabScrollerFoundation = /** @class */ (function (_super) {
         //
         // We use those principles below to determine which RTL scrollLeft
         // behavior is implemented in the current browser.
-        var initialScrollLeft = this.adapter_.getScrollAreaScrollLeft();
-        this.adapter_.setScrollAreaScrollLeft(initialScrollLeft - 1);
-        var newScrollLeft = this.adapter_.getScrollAreaScrollLeft();
+        var initialScrollLeft = this.adapter.getScrollAreaScrollLeft();
+        this.adapter.setScrollAreaScrollLeft(initialScrollLeft - 1);
+        var newScrollLeft = this.adapter.getScrollAreaScrollLeft();
         // If the newScrollLeft value is negative,then we know that the browser has
         // implemented negative RTL scrolling, since all other implementations have
         // only positive values.
         if (newScrollLeft < 0) {
             // Undo the scrollLeft test check
-            this.adapter_.setScrollAreaScrollLeft(initialScrollLeft);
-            return new MDCTabScrollerRTLNegative(this.adapter_);
+            this.adapter.setScrollAreaScrollLeft(initialScrollLeft);
+            return new MDCTabScrollerRTLNegative(this.adapter);
         }
-        var rootClientRect = this.adapter_.computeScrollAreaClientRect();
-        var contentClientRect = this.adapter_.computeScrollContentClientRect();
+        var rootClientRect = this.adapter.computeScrollAreaClientRect();
+        var contentClientRect = this.adapter.computeScrollContentClientRect();
         var rightEdgeDelta = Math.round(contentClientRect.right - rootClientRect.right);
         // Undo the scrollLeft test check
-        this.adapter_.setScrollAreaScrollLeft(initialScrollLeft);
+        this.adapter.setScrollAreaScrollLeft(initialScrollLeft);
         // By calculating the clientRect of the root element and the clientRect of
         // the content element, we can determine how much the scroll value changed
         // when we performed the scrollLeft subtraction above.
         if (rightEdgeDelta === newScrollLeft) {
-            return new MDCTabScrollerRTLReverse(this.adapter_);
+            return new MDCTabScrollerRTLReverse(this.adapter);
         }
-        return new MDCTabScrollerRTLDefault(this.adapter_);
+        return new MDCTabScrollerRTLDefault(this.adapter);
     };
     MDCTabScrollerFoundation.prototype.isRTL_ = function () {
-        return this.adapter_.getScrollContentStyleValue('direction') === 'rtl';
+        return this.adapter.getScrollContentStyleValue('direction') === 'rtl';
     };
     return MDCTabScrollerFoundation;
 }(MDCFoundation));
@@ -849,18 +848,19 @@ var MDCTabBarFoundation = /** @class */ (function (_super) {
         this.useAutomaticActivation_ = useAutomaticActivation;
     };
     MDCTabBarFoundation.prototype.activateTab = function (index) {
-        var previousActiveIndex = this.adapter_.getPreviousActiveTabIndex();
+        var previousActiveIndex = this.adapter.getPreviousActiveTabIndex();
         if (!this.indexIsInRange_(index) || index === previousActiveIndex) {
             return;
         }
         var previousClientRect;
         if (previousActiveIndex !== -1) {
-            this.adapter_.deactivateTabAtIndex(previousActiveIndex);
-            previousClientRect = this.adapter_.getTabIndicatorClientRectAtIndex(previousActiveIndex);
+            this.adapter.deactivateTabAtIndex(previousActiveIndex);
+            previousClientRect =
+                this.adapter.getTabIndicatorClientRectAtIndex(previousActiveIndex);
         }
-        this.adapter_.activateTabAtIndex(index, previousClientRect);
+        this.adapter.activateTabAtIndex(index, previousClientRect);
         this.scrollIntoView(index);
-        this.adapter_.notifyTabActivated(index);
+        this.adapter.notifyTabActivated(index);
     };
     MDCTabBarFoundation.prototype.handleKeyDown = function (evt) {
         // Get the key from the event
@@ -877,18 +877,18 @@ var MDCTabBarFoundation = /** @class */ (function (_super) {
             if (this.isActivationKey_(key)) {
                 return;
             }
-            var index = this.determineTargetFromKey_(this.adapter_.getPreviousActiveTabIndex(), key);
-            this.adapter_.setActiveTab(index);
+            var index = this.determineTargetFromKey_(this.adapter.getPreviousActiveTabIndex(), key);
+            this.adapter.setActiveTab(index);
             this.scrollIntoView(index);
         }
         else {
-            var focusedTabIndex = this.adapter_.getFocusedTabIndex();
+            var focusedTabIndex = this.adapter.getFocusedTabIndex();
             if (this.isActivationKey_(key)) {
-                this.adapter_.setActiveTab(focusedTabIndex);
+                this.adapter.setActiveTab(focusedTabIndex);
             }
             else {
                 var index = this.determineTargetFromKey_(focusedTabIndex, key);
-                this.adapter_.focusTabAtIndex(index);
+                this.adapter.focusTabAtIndex(index);
                 this.scrollIntoView(index);
             }
         }
@@ -897,7 +897,7 @@ var MDCTabBarFoundation = /** @class */ (function (_super) {
      * Handles the MDCTab:interacted event
      */
     MDCTabBarFoundation.prototype.handleTabInteraction = function (evt) {
-        this.adapter_.setActiveTab(this.adapter_.getIndexOfTabById(evt.detail.tabId));
+        this.adapter.setActiveTab(this.adapter.getIndexOfTabById(evt.detail.tabId));
     };
     /**
      * Scrolls the tab at the given index into view
@@ -910,12 +910,12 @@ var MDCTabBarFoundation = /** @class */ (function (_super) {
         }
         // Always scroll to 0 if scrolling to the 0th index
         if (index === 0) {
-            return this.adapter_.scrollTo(0);
+            return this.adapter.scrollTo(0);
         }
         // Always scroll to the max value if scrolling to the Nth index
         // MDCTabScroller.scrollTo() will never scroll past the max possible value
-        if (index === this.adapter_.getTabListLength() - 1) {
-            return this.adapter_.scrollTo(this.adapter_.getScrollContentWidth());
+        if (index === this.adapter.getTabListLength() - 1) {
+            return this.adapter.scrollTo(this.adapter.getScrollContentWidth());
         }
         if (this.isRTL_()) {
             return this.scrollIntoViewRTL_(index);
@@ -929,7 +929,7 @@ var MDCTabBarFoundation = /** @class */ (function (_super) {
      */
     MDCTabBarFoundation.prototype.determineTargetFromKey_ = function (origin, key) {
         var isRTL = this.isRTL_();
-        var maxIndex = this.adapter_.getTabListLength() - 1;
+        var maxIndex = this.adapter.getTabListLength() - 1;
         var shouldGoToEnd = key === strings$1.END_KEY;
         var shouldDecrement = key === strings$1.ARROW_LEFT_KEY && !isRTL || key === strings$1.ARROW_RIGHT_KEY && isRTL;
         var shouldIncrement = key === strings$1.ARROW_RIGHT_KEY && !isRTL || key === strings$1.ARROW_LEFT_KEY && isRTL;
@@ -962,7 +962,7 @@ var MDCTabBarFoundation = /** @class */ (function (_super) {
      * @param barWidth The width of the Tab Bar
      */
     MDCTabBarFoundation.prototype.calculateScrollIncrement_ = function (index, nextIndex, scrollPosition, barWidth) {
-        var nextTabDimensions = this.adapter_.getTabDimensionsAtIndex(nextIndex);
+        var nextTabDimensions = this.adapter.getTabDimensionsAtIndex(nextIndex);
         var relativeContentLeft = nextTabDimensions.contentLeft - scrollPosition - barWidth;
         var relativeContentRight = nextTabDimensions.contentRight - scrollPosition;
         var leftIncrement = relativeContentRight - numbers.EXTRA_SCROLL_AMOUNT;
@@ -981,7 +981,7 @@ var MDCTabBarFoundation = /** @class */ (function (_super) {
      * @param scrollContentWidth The width of the scroll content
      */
     MDCTabBarFoundation.prototype.calculateScrollIncrementRTL_ = function (index, nextIndex, scrollPosition, barWidth, scrollContentWidth) {
-        var nextTabDimensions = this.adapter_.getTabDimensionsAtIndex(nextIndex);
+        var nextTabDimensions = this.adapter.getTabDimensionsAtIndex(nextIndex);
         var relativeContentLeft = scrollContentWidth - nextTabDimensions.contentLeft - scrollPosition;
         var relativeContentRight = scrollContentWidth - nextTabDimensions.contentRight - scrollPosition - barWidth;
         var leftIncrement = relativeContentRight + numbers.EXTRA_SCROLL_AMOUNT;
@@ -1076,44 +1076,44 @@ var MDCTabBarFoundation = /** @class */ (function (_super) {
      * @param index The index to test
      */
     MDCTabBarFoundation.prototype.indexIsInRange_ = function (index) {
-        return index >= 0 && index < this.adapter_.getTabListLength();
+        return index >= 0 && index < this.adapter.getTabListLength();
     };
     /**
      * Returns the view's RTL property
      */
     MDCTabBarFoundation.prototype.isRTL_ = function () {
-        return this.adapter_.isRTL();
+        return this.adapter.isRTL();
     };
     /**
      * Scrolls the tab at the given index into view for left-to-right user agents.
      * @param index The index of the tab to scroll into view
      */
     MDCTabBarFoundation.prototype.scrollIntoView_ = function (index) {
-        var scrollPosition = this.adapter_.getScrollPosition();
-        var barWidth = this.adapter_.getOffsetWidth();
-        var tabDimensions = this.adapter_.getTabDimensionsAtIndex(index);
+        var scrollPosition = this.adapter.getScrollPosition();
+        var barWidth = this.adapter.getOffsetWidth();
+        var tabDimensions = this.adapter.getTabDimensionsAtIndex(index);
         var nextIndex = this.findAdjacentTabIndexClosestToEdge_(index, tabDimensions, scrollPosition, barWidth);
         if (!this.indexIsInRange_(nextIndex)) {
             return;
         }
         var scrollIncrement = this.calculateScrollIncrement_(index, nextIndex, scrollPosition, barWidth);
-        this.adapter_.incrementScroll(scrollIncrement);
+        this.adapter.incrementScroll(scrollIncrement);
     };
     /**
      * Scrolls the tab at the given index into view in RTL
      * @param index The tab index to make visible
      */
     MDCTabBarFoundation.prototype.scrollIntoViewRTL_ = function (index) {
-        var scrollPosition = this.adapter_.getScrollPosition();
-        var barWidth = this.adapter_.getOffsetWidth();
-        var tabDimensions = this.adapter_.getTabDimensionsAtIndex(index);
-        var scrollWidth = this.adapter_.getScrollContentWidth();
+        var scrollPosition = this.adapter.getScrollPosition();
+        var barWidth = this.adapter.getOffsetWidth();
+        var tabDimensions = this.adapter.getTabDimensionsAtIndex(index);
+        var scrollWidth = this.adapter.getScrollContentWidth();
         var nextIndex = this.findAdjacentTabIndexClosestToEdgeRTL_(index, tabDimensions, scrollPosition, barWidth, scrollWidth);
         if (!this.indexIsInRange_(nextIndex)) {
             return;
         }
         var scrollIncrement = this.calculateScrollIncrementRTL_(index, nextIndex, scrollPosition, barWidth, scrollWidth);
-        this.adapter_.incrementScroll(scrollIncrement);
+        this.adapter.incrementScroll(scrollIncrement);
     };
     return MDCTabBarFoundation;
 }(MDCFoundation));
