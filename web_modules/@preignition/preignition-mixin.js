@@ -1,35 +1,10 @@
-import '../common/lit-html-ae713ed3.js';
-import { unsafeCSS } from '../lit-element.js';
-import '../common/directive-6dfed3e1.js';
-export { d as DefaultValueMixin, a as DoNotSetUndefinedValue } from '../common/defaultValueMixin-08d4cab8.js';
+export { d as DefaultValueMixin, a as DoNotSetUndefinedValue } from '../common/defaultValueMixin-cb2ff445.js';
 
-/**
- * applies style to a already registered custom element
- * @param  {String } css      css to apply
- * @param  {String} element   element name
- */
-const cssTheme = (css, element) => {
-  const cls = customElements.get(element);
-  if (!cls) {
-    throw new Error(`custom element for ${element} is not yet registered`)
-  }
-  cls._styles.push(unsafeCSS(css));
-};
-
-// import { select } from 'd3-selection';
-// import { transition } from 'd3-transition';
-
-// export const selectShadow = (selector, el) => {
-//   return select(el.renderRoot.querySelector(selector));
-// }
 const queryShadow = (selector, el) => {
   return el.renderRoot.querySelector(selector);
 };
 
-// export default selectShadow;
-
 const selectMixin = (superclass) => class extends superclass {
-  
   queryShadow(selector) {
     return queryShadow(selector, this);
   }
@@ -44,18 +19,21 @@ const selectMixin = (superclass) => class extends superclass {
 const RelayTo = superClass => {
 
   return class extends superClass {
-    
+
     shallRelayTo() {
       this.log && console.warn(`shallPassTo method has to be overriden`);
       return false;
-      
+
     }
 
-    relayTo(props, name) {
+    async relayTo(props, name) {
       if (!this[`__${name}`]) {
         this[`__${name}`] = this.queryShadow(`#${name}`);
         if (!this[`__${name}`]) {
-          throw new Error(`Failed to get ${name} from shadowDom!`)
+          console.warn(`Failed to get ${name} from shadowDom!`);
+          await this.updateComplete;
+          return this.relayTo(props, name);
+          // throw new Error(`Failed to get ${name} from shadowDom!`)
         }
       }
       props.forEach((value, key) => {
@@ -65,7 +43,7 @@ const RelayTo = superClass => {
         }
       });
     }
-  }
+  };
 
 };
 
@@ -92,4 +70,4 @@ const CacheId = superClass => {
   };
 };
 
-export { CacheId, RelayTo, selectMixin as SelectMixin, cssTheme };
+export { CacheId, RelayTo, selectMixin as SelectMixin };

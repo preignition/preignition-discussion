@@ -1,6 +1,6 @@
-import { h as html, e as nothing } from '../common/lit-html-ae713ed3.js';
+import { h as html, e as nothing } from '../common/lit-html-96fe430f.js';
 import '../lit-element.js';
-import '../common/directive-6dfed3e1.js';
+import '../common/directive-651fd9cf.js';
 import { unsafeHTML } from '../lit-html/directives/unsafe-html.js';
 import purify from '../dompurify.js';
 
@@ -2361,7 +2361,7 @@ var marked_1 = marked;
  * @param  {String} markdown markdown string
  * @return {TemplateResult}          lit-element template result
  */
-var parse = (markdown) => {
+var parse = (markdown, config = {}) => {
   if (!markdown) {
     return html`
       ${nothing}
@@ -2369,7 +2369,7 @@ var parse = (markdown) => {
   }
 
   return html`
-    ${unsafeHTML(purify.sanitize(marked_1(markdown)))}
+    ${unsafeHTML(purify.sanitize(marked_1(markdown), config))}
   `;
 };
 
@@ -2389,4 +2389,28 @@ var resizeTextarea = textarea => {
   textarea.style.height = height + 'px';
 };
 
-export { parse, resizeTextarea };
+var getter = db => {
+  return async path => db.ref(path).once('value').then(snap => snap.val());
+};
+
+const generator = (name) => {
+  return class E extends Error {
+    constructor(message, context) {
+      // Pass remaining arguments (including vendor specific ones) to parent constructor
+      super(...arguments);
+
+      this.name = name;
+      if (context) {
+        this.context = context;
+      }
+    }
+  };
+};
+
+// Note(cg): to be used as generic errors.
+const E = generator('E');
+
+// Note(cg): to be used as missing stuff.
+const EMissing = generator('Missing');
+
+export { E, EMissing, getter, parse, resizeTextarea };

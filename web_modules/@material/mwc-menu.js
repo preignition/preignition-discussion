@@ -1,13 +1,12 @@
-import { a as __extends, c as __values, b as __assign, M as MDCFoundation, _ as __decorate } from '../common/foundation-bc699e66.js';
-import { h as html } from '../common/lit-html-ae713ed3.js';
+import { a as __extends, e as __values, b as __assign, M as MDCFoundation, _ as __decorate, B as BaseElement, g as addHasRemoveClass, d as doesElementContainFocus, c as deepActiveElementPath } from '../common/foundation-6ef82166.js';
+import { h as html } from '../common/lit-html-96fe430f.js';
 import { query, property, internalProperty, css, customElement } from '../lit-element.js';
-import '../common/directive-6dfed3e1.js';
-import { B as BaseElement, b as addHasRemoveClass, d as doesElementContainFocus, a as deepActiveElementPath } from '../common/base-element-6dce937b.js';
-import { c as classMap } from '../common/class-map-72ef267f.js';
-import { o as observer } from '../common/observer-579e419c.js';
+import '../common/directive-651fd9cf.js';
+import { c as classMap } from '../common/class-map-4c8464c9.js';
+import { o as observer } from '../common/observer-0bd28502.js';
 import '../lit-html/directives/if-defined.js';
-import { c as cssClasses$2 } from '../common/mwc-list-6a59137b.js';
-export { a as createSetFromIndex, i as isEventMulti, b as isIndexSet } from '../common/mwc-list-6a59137b.js';
+import { c as cssClasses$2 } from '../common/mwc-list-0b814c4f.js';
+export { a as createSetFromIndex, i as isEventMulti, b as isIndexSet } from '../common/mwc-list-0b814c4f.js';
 
 /**
  * @license
@@ -942,7 +941,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
-const style = css `.mdc-menu-surface{display:none;position:absolute;box-sizing:border-box;max-width:calc(100vw - 32px);max-height:calc(100vh - 32px);margin:0;padding:0;transform:scale(1);transform-origin:top left;opacity:0;overflow:auto;will-change:transform,opacity;z-index:8;transition:opacity .03s linear,transform .12s cubic-bezier(0, 0, 0.2, 1);box-shadow:0px 5px 5px -3px rgba(0, 0, 0, 0.2),0px 8px 10px 1px rgba(0, 0, 0, 0.14),0px 3px 14px 2px rgba(0,0,0,.12);background-color:#fff;background-color:var(--mdc-theme-surface, #fff);color:#000;color:var(--mdc-theme-on-surface, #000);border-radius:4px;border-radius:var(--mdc-shape-medium, 4px);transform-origin-left:top left;transform-origin-right:top right}.mdc-menu-surface:focus{outline:none}.mdc-menu-surface--open{display:inline-block;transform:scale(1);opacity:1}.mdc-menu-surface--animating-open{display:inline-block;transform:scale(0.8);opacity:0}.mdc-menu-surface--animating-closed{display:inline-block;opacity:0;transition:opacity .075s linear}[dir=rtl] .mdc-menu-surface,.mdc-menu-surface[dir=rtl]{transform-origin-left:top right;transform-origin-right:top left}.mdc-menu-surface--anchor{position:relative;overflow:visible}.mdc-menu-surface--fixed{position:fixed}.mdc-menu-surface--fullwidth{width:100%}:host(:not([open])){display:none}.mdc-menu-surface{z-index:var(--mdc-menu-z-index, 8)}`;
+const style = css `.mdc-menu-surface{display:none;position:absolute;box-sizing:border-box;max-width:calc(100vw - 32px);max-height:calc(100vh - 32px);margin:0;padding:0;transform:scale(1);transform-origin:top left;opacity:0;overflow:auto;will-change:transform,opacity;z-index:8;transition:opacity .03s linear,transform .12s cubic-bezier(0, 0, 0.2, 1),height 250ms cubic-bezier(0, 0, 0.2, 1);box-shadow:0px 5px 5px -3px rgba(0, 0, 0, 0.2),0px 8px 10px 1px rgba(0, 0, 0, 0.14),0px 3px 14px 2px rgba(0,0,0,.12);background-color:#fff;background-color:var(--mdc-theme-surface, #fff);color:#000;color:var(--mdc-theme-on-surface, #000);border-radius:4px;border-radius:var(--mdc-shape-medium, 4px);transform-origin-left:top left;transform-origin-right:top right}.mdc-menu-surface:focus{outline:none}.mdc-menu-surface--open{display:inline-block;transform:scale(1);opacity:1}.mdc-menu-surface--animating-open{display:inline-block;transform:scale(0.8);opacity:0}.mdc-menu-surface--animating-closed{display:inline-block;opacity:0;transition:opacity .075s linear}[dir=rtl] .mdc-menu-surface,.mdc-menu-surface[dir=rtl]{transform-origin-left:top right;transform-origin-right:top left}.mdc-menu-surface--anchor{position:relative;overflow:visible}.mdc-menu-surface--fixed{position:fixed}.mdc-menu-surface--fullwidth{width:100%}:host(:not([open])){display:none}.mdc-menu-surface{z-index:var(--mdc-menu-z-index, 8)}`;
 
 /**
 @license

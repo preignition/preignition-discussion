@@ -955,9 +955,13 @@ var twitterStyle = {
   // adjusting its "minute" `threshold` to be 45.
   gradation: [// Minutes
   _objectSpread({}, getStep(canonical, 'minute'), {
-    threshold: 45
+    // Starts showing `1m` after `59s`.
+    threshold: 59.5
   }), // Hours
-  getStep(canonical, 'hour'), // If `date` and `now` happened the same year,
+  _objectSpread({}, getStep(canonical, 'hour'), {
+    // After `59m` it will show `1h`.
+    threshold: 59.5 * 60
+  }), // If `date` and `now` happened the same year,
   // then only output month and day.
   {
     threshold: day - 0.5 * hour,

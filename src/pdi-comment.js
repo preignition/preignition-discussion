@@ -93,7 +93,7 @@ class PdiComment extends Base {
       ${this.mainTemplate}
       <div class="body">
         ${isEditing ? html `<textarea rows="1" .readOnly="${this.state === 'saving'}" @input="${this.onInput}" placeholder="${this.type === 'reply' ? 'Reply...' : ''}" .value="${this.body || ''}"></textarea>` : ''}
-        ${!isEditing ? html `<div id="parsed">${parse(this.body || '')}</div>` : ''}
+        ${!isEditing ? html `<div id="parsed">${parse(this.body || '', {ADD_ATTR: ['target']})}</div>` : ''}
       </div>
       ${this.state === 'edit' || !this.id ? html `
          <div class="tools">
