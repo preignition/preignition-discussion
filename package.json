@@ -1,6 +1,6 @@
 {
   "name": "@preignition/preignition-discussion",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "license": "SEE LICENCE IN LICENCE.md",
   "description": "lit-element based commenting tool",
   "type": "module",
