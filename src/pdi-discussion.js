@@ -43,8 +43,8 @@ class PdiDiscussion extends Base {
     return html `
       ${this.deleteTemplate}
       ${this.mainTemplate}
-      ${this.active || !this.id ? html `
-        <pdi-comment .active="${this.active}" .type="${this.id ? 'reply' : 'comment'}" state="edit"  .metaPath="${this.metaPath}" .dataPath="${this.dataPath}"></pdi-comment>
+      ${!this.id || this.active ? html `
+        <pdi-comment .active="${this.active}" type="${!this.id ? 'comment' : 'reply'}" state="edit"  .metaPath="${this.metaPath}" .dataPath="${this.dataPath}"></pdi-comment>
         ` : ''}
     `;
   }
@@ -55,18 +55,18 @@ class PdiDiscussion extends Base {
       <div class="deleting">
         <div>
            <div >Delete this comment ?</div>
-           <mwc-button  raised dense label="cancel"  @click="${ e => this.deleting = false}"></mwc-button>
+           <mwc-button  raised dense label="cancel"  @click="${e => this.deleting = false}"></mwc-button>
            <mwc-button  raised dense label="delete"  @click="${this.doDelete}"></mwc-button>
         </div>
       </div>
-    `
+    `;
   }
 
   get mainTemplate() {
     if (!this.id) { return ''; }
     return html `
-      <lif-query .path="${this.dataPath(this.id)}/items" @data-changed="${e => this.items = e.detail.value}"></lif-query>
-      <pdi-comment .active="${this.active}" .resolved="${this.resolved}" .id="${this.id}" .state="${this.state}" .metaPath="${this.metaPath}" .dataPath="${this.dataPath}"></pdi-comment>
+      <lif-query .path="${this.dataPath(this.id)}/items" @data-changed="${this.onDataChanged}"></lif-query>
+      <pdi-comment .active="${this.active}" .resolved="${this.resolved}" .id="${this.id}" .metaPath="${this.metaPath}" .dataPath="${this.dataPath}"></pdi-comment>
       ${(this.items || []).map(item => {
         if (item.type === 'reply') {
           return html `<pdi-comment .active="${this.active}" .dataPath="${this.dataPath}" .metaPath="${this.metaPath}" type="reply" .id=${item.$key}></pdi-comment>`;
@@ -74,15 +74,18 @@ class PdiDiscussion extends Base {
       })}`;
   }
 
+  onDataChanged(e) {
+    this.items = e.detail.value;
+    this.active = false;
+    // Note(cg): first time we add a comment, .
+    // if (this.items.length === 1) {
+    //   this.state = 'saved';
+    // }
+  }
+ 
   static get properties() {
     return {
-      /*
-       * `state` one of {new|editing|saved}
-       */
-      state: {
-        type: String,
-      },
-
+   
       /*
        * `active` true when discussion is active
        */
@@ -156,22 +159,61 @@ class PdiDiscussion extends Base {
     };
   }
 
-  constructor() {
-    super();
-    this.setAttribute('tabindex', '0');
-    this.addEventListener('blur', () => { this.active = false; this.deleting = false; });
-    this.addEventListener('focus', () => {this.active = true;});
-    this.addEventListener('pdi-discussion-pre-delete', e => { e.stopPropagation(); this.deleting = true; });
-    this.addEventListener('pdi-discussion-cancel', this.onCancel.bind(this));
-    this.addEventListener('pdi-discussion-resolve', this.onResolve.bind(this));
+  updated(props) {
+    if (props.has('id')) {
+      this.active = false;
+    }
+    super.updated(props);
+  }
+  
 
-    this.addEventListener('pdi-discussion-create', this.onCreate.bind(this));
-    // this.addEventListener('pdi-discussion-save', this.onSave.bind(this));
-    // this.addEventListener('pdi-discussion-delete', this.onDoDelete.bind(this));
-    // this.addEventListener('pdi-discussion-resolve', this.onResolve.bind(this));
+  connectedCallback() {
+    super.connectedCallback();
+    this.setAttribute('tabindex', '0');
+    // this.addEventListener('blur', () => { this.active = false; this.deleting = false; });
+    // this.addEventListener('focus', () => {this.active = true;});
+    this.addEventListener('focus', this._onFocus);
+    this.addEventListener('blur', this._onBlur);
+    
+    this.addEventListener('pdi-discussion-deactivate', this._onDeactivate);
+    this.addEventListener('pdi-discussion-pre-delete', this._onPredelete);
+    this.addEventListener('pdi-discussion-cancel', this._onCancel);
+    this.addEventListener('pdi-discussion-resolve', this._onResolve);
+    this.addEventListener('pdi-discussion-create', this._onCreate);
   }
 
-  onCreate(e) {
+  disconnectedCallback() {
+    this.removeEventListener('focus', this._onFocus);
+    this.removeEventListener('blur', this._onBlur);
+    
+    this.removeEventListener('pdi-discussion-deactivate', this._onDeactivate);
+    this.removeEventListener('pdi-discussion-pre-delete', this._onPredelete);
+    this.removeEventListener('pdi-discussion-cancel', this._onCancel);
+    this.removeEventListener('pdi-discussion-resolve', this._onResolve);
+    this.removeEventListener('pdi-discussion-create', this._onCreate);
+    super.disconnectedCallback();
+  }
+
+  _onBlur(e) {
+    this.active = false;
+    this.deleting = false;
+    
+  }
+
+  _onFocus() {
+    this.active = true;
+  }
+
+  _onDeactivate() {
+    this.active = false;
+  }
+
+  _onPredelete(e) {
+     e.stopPropagation(); 
+     this.deleting = true; 
+  }
+
+  _onCreate(e) {
     const type = this.id ? 'reply' : 'comment';
     e.detail.type = type;
     if (type === 'reply') {
@@ -179,26 +221,26 @@ class PdiDiscussion extends Base {
     }
   }
 
-  onCancel(e) {
+  _onCancel(e) {
     e.stopPropagation();
     if (!this.id) {
       this.parentNode.removeChild(this);
     }
   }
 
-  onResolve() {
+  _onResolve() {
     this.resolved = true;
   }
 
   doDelete() {
-    this.dispatchEvent(new CustomEvent('pdi-discussion-delete', { detail: { id: this.id, type: this.type }, bubbles: true, composed: true }));
+    const cancelled = !this.dispatchEvent(new CustomEvent('pdi-discussion-delete', { detail: { id: this.id, type: this.type }, cancelable: true, bubbles: true, composed: true }));
+    if (!cancelled) {
+       // Note(cg): only remove node if the event has not been cancelled
+       // this allow to handle removal on listening pdi-discussion-delete.
+      this.parentNode.removeChild(this);
+    }
   }
   
-  deleteCallback() {
-    this.parentNode.removeChild(this);
-  }
-
-
 }
 
 // Register the new element with the browser.

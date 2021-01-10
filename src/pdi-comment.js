@@ -98,7 +98,7 @@ class PdiComment extends Base {
       ${this.state === 'edit' || !this.id ? html `
          <div class="tools">
            ${!this.id ? html `<mwc-button .disabled="${!this.hasChange}" outlined dense label="${this.type === 'reply' ? 'Reply' : 'Comment'}"  @click="${this.onCreate}"></mwc-button>` : ''}
-           ${this.id ? html `<mwc-button .disabled="${!this.hasChange}" outlined dense label="Save"  @click="${this.onSave}"></mwc-button>` : ''}
+           ${this.state === 'edit' && this.id ? html `<mwc-button .disabled="${!this.hasChange}" outlined dense label="Save"  @click="${this.onSave}"></mwc-button>` : ''}
           <mwc-button outlined dense label="cancel"  @click="${this.onCancel}"></mwc-button>
         </div>
         ` : ''}
@@ -226,6 +226,7 @@ class PdiComment extends Base {
 
   constructor() {
     super();
+    this.state = 'saved';
     // this.addEventListener('blur', () => {this.deleting = false;});
     this.addEventListener('keydown', e => {
       if (e.ctrlKey && e.key === 'Enter') {
@@ -267,6 +268,7 @@ class PdiComment extends Base {
 
   onEdit(e) {
     this.state = 'edit';
+    this.deactivate()
     setTimeout(() => {
       this.textarea.focus();
     }, 40);
@@ -289,10 +291,10 @@ class PdiComment extends Base {
   // Note(cg): should be called by component listening to `pdi-discussion-create`. 
   // and called when created is done
   createdCallback(id) {
+    this.state = 'saving';
     if (!this.id) {
       this.id = id;
     }
-    this.state = 'saved';
   }
 
 
@@ -306,28 +308,31 @@ class PdiComment extends Base {
   }
 
   doDelete() {
-    this.dispatchEvent(new CustomEvent('pdi-discussion-delete', { detail: { id: this.id, type: this.type }, bubbles: true, composed: true }));
-  }
-
-  deleteCallback() {
-    if (this.type === 'comment') {
-      this.parentNode.removeChild(this);
-      return;
+    const cancelled = !this.dispatchEvent(new CustomEvent('pdi-discussion-delete', { detail: { id: this.id, type: this.type }, cancelable: true, bubbles: true, composed: true }));
+    if (!cancelled) {
+      if (this.type === 'comment') {
+        this.parentNode.removeChild(this);
+        return;
+      }
+      const parent = this.shadowRoot.host;
+      parent.parentNode.removeChild(parent);
     }
-    const parent = this.shadowRoot.host;
-    parent.parentNode.removeChild(parent);
   }
-
+  
   onResolve() {
     this.dispatchEvent(new CustomEvent('pdi-discussion-resolve', { detail: { id: this.id }, bubbles: true, composed: true }));
   }
 
-  onResolve() {
+  onReopen() {
     this.dispatchEvent(new CustomEvent('pdi-discussion-reopen', { detail: { id: this.id }, bubbles: true, composed: true }));
   }
 
   resolveCallback() {
     this.dispatchEvent(new CustomEvent('pdi-discussion-resolved', { detail: { id: this.id }, bubbles: true, composed: true }));
+  }
+
+  deactivate() {
+    this.dispatchEvent(new CustomEvent('pdi-discussion-deactivate', { bubbles: true, composed: true }));
   }
 
   onInput(e) {
