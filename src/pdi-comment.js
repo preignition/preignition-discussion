@@ -7,11 +7,10 @@ import deleteStyle from './delete-style.js';
 import '@material/mwc-icon-button';
 import '@material/mwc-button';
 import '@material/mwc-menu';
-import '@material/mwc-list/mwc-list-item.js';
+import '@material/mwc-list';
 
 
 class PdiComment extends Base {
-
   static get styles() {
     return [deleteStyle, css `
     :host {
@@ -114,17 +113,17 @@ class PdiComment extends Base {
            <mwc-button raised dense label="delete" @click="${this.doDelete}"></mwc-button>
         </div>
       </div>
-    `
+    `;
   }
 
   get resolveTemplate() {
-    return this.resolved ?  
-      html `<mwc-button class="tool resolve" outlined dense @click="${this.onReopen}" label="re-open"></mwc-button>` :  
-      html `<mwc-button class="tool resolve" outlined dense @click="${this.onResolve}" label="resolve"></mwc-button>`
+    return this.resolved ?
+      html `<mwc-button class="tool resolve" outlined dense @click="${this.onReopen}" label="re-open"></mwc-button>` :
+      html `<mwc-button class="tool resolve" outlined dense @click="${this.onResolve}" label="resolve"></mwc-button>`;
   }
 
   get mainTemplate() {
-    if (!this.id) { return html `<div class="header">`; }
+    if (!this.id) {return html `<div class="header">`;}
     return html `
        <lif-document .path="${this.dataPath(this.id)}/body" @data-changed="${e => this.body = e.detail.value}"></lif-document>
        <lif-document .path="${this.metaPath(this.id)}" @data-changed="${e => this.meta = e.detail.value}"></lif-document>
@@ -189,7 +188,6 @@ class PdiComment extends Base {
        */
       deleting: {
         type: Boolean,
-        value: false
       },
 
       dataPath: {
@@ -226,6 +224,7 @@ class PdiComment extends Base {
 
   constructor() {
     super();
+    this.deleting = false;
     this.state = 'saved';
     // this.addEventListener('blur', () => {this.deleting = false;});
     this.addEventListener('keydown', e => {
@@ -243,7 +242,6 @@ class PdiComment extends Base {
     if (!this.id && this.textarea) {
       this.textarea.focus();
     }
-
   }
 
   removeSelf() {
@@ -260,7 +258,7 @@ class PdiComment extends Base {
     this.hasChange = false;
   }
 
-  // Note(cg): should be called by component listening to `pdi-discussion-save`. 
+  // Note(cg): should be called by component listening to `pdi-discussion-save`.
   // and called when save is done
   savedCallback() {
     this.state = 'saved';
@@ -268,7 +266,7 @@ class PdiComment extends Base {
 
   onEdit(e) {
     this.state = 'edit';
-    this.deactivate()
+    this.deactivate();
     setTimeout(() => {
       this.textarea.focus();
     }, 40);
@@ -288,7 +286,7 @@ class PdiComment extends Base {
     this.state = 'saving';
   }
 
-  // Note(cg): should be called by component listening to `pdi-discussion-create`. 
+  // Note(cg): should be called by component listening to `pdi-discussion-create`.
   // and called when created is done
   createdCallback(id) {
     this.state = 'saving';
@@ -304,7 +302,6 @@ class PdiComment extends Base {
       return;
     }
     this.dispatchEvent(new CustomEvent('pdi-discussion-pre-delete', {bubbles: true, composed: true }));
-
   }
 
   doDelete() {
@@ -318,7 +315,7 @@ class PdiComment extends Base {
       parent.parentNode.removeChild(parent);
     }
   }
-  
+
   onResolve() {
     this.dispatchEvent(new CustomEvent('pdi-discussion-resolve', { detail: { id: this.id }, bubbles: true, composed: true }));
   }
@@ -353,7 +350,6 @@ class PdiComment extends Base {
   get textarea() {
     return this.renderRoot.querySelector('textarea');
   }
-
 }
 
 // Register the new element with the browser.

@@ -5,7 +5,6 @@ import deleteStyle from './delete-style.js';
 import '@preignition/lit-firebase';
 
 class PdiDiscussion extends Base {
-
   static get styles() {
     return [deleteStyle, css `
     :host {
@@ -49,7 +48,7 @@ class PdiDiscussion extends Base {
     `;
   }
   get deleteTemplate() {
-    if (!this.deleting) { return nothing; }
+    if (!this.deleting) {return nothing;}
     return html `
 
       <div class="deleting">
@@ -63,7 +62,7 @@ class PdiDiscussion extends Base {
   }
 
   get mainTemplate() {
-    if (!this.id) { return ''; }
+    if (!this.id) {return '';}
     return html `
       <lif-query .path="${this.dataPath(this.id)}/items" @data-changed="${this.onDataChanged}"></lif-query>
       <pdi-comment .active="${this.active}" .resolved="${this.resolved}" .id="${this.id}" .metaPath="${this.metaPath}" .dataPath="${this.dataPath}"></pdi-comment>
@@ -82,10 +81,10 @@ class PdiDiscussion extends Base {
     //   this.state = 'saved';
     // }
   }
- 
+
   static get properties() {
     return {
-   
+
       /*
        * `active` true when discussion is active
        */
@@ -110,18 +109,12 @@ class PdiDiscussion extends Base {
        */
       dataPath: {
         type: Function,
-        value: function() {
-          return id => `/comment/${id || ''}`;
-        }
       },
       /*
        * a function returning path where comment is stored
        */
       metaPath: {
         type: Function,
-        value: function() {
-          return id => `/commentMeta/${id || ''}/updated`;
-        }
       },
 
       /*
@@ -136,7 +129,6 @@ class PdiDiscussion extends Base {
        */
       deleting: {
         type: Boolean,
-        value: false
       },
 
       /*
@@ -145,7 +137,6 @@ class PdiDiscussion extends Base {
       resolved: {
         type: Boolean,
         reflect: true,
-        value: false
       },
 
       /*
@@ -153,10 +144,18 @@ class PdiDiscussion extends Base {
        */
       hideResolved: {
         type: Boolean,
-        attribute: 'hide-resolved',
-        value: false
+        attribute: 'hide-resolved'
       },
     };
+  }
+
+  constructor(){
+   super();
+   this.dataPath =  id => `/comment/${id || ''}`;
+   this.metaPath = id => `/commentMeta/${id || ''}/updated`;
+   this.deleting = false
+   this.resolved = false;
+   this.hideResolved = false;
   }
 
   updated(props) {
@@ -165,7 +164,7 @@ class PdiDiscussion extends Base {
     }
     super.updated(props);
   }
-  
+
 
   connectedCallback() {
     super.connectedCallback();
@@ -174,7 +173,7 @@ class PdiDiscussion extends Base {
     // this.addEventListener('focus', () => {this.active = true;});
     this.addEventListener('focus', this._onFocus);
     this.addEventListener('blur', this._onBlur);
-    
+
     this.addEventListener('pdi-discussion-deactivate', this._onDeactivate);
     this.addEventListener('pdi-discussion-pre-delete', this._onPredelete);
     this.addEventListener('pdi-discussion-cancel', this._onCancel);
@@ -185,7 +184,7 @@ class PdiDiscussion extends Base {
   disconnectedCallback() {
     this.removeEventListener('focus', this._onFocus);
     this.removeEventListener('blur', this._onBlur);
-    
+
     this.removeEventListener('pdi-discussion-deactivate', this._onDeactivate);
     this.removeEventListener('pdi-discussion-pre-delete', this._onPredelete);
     this.removeEventListener('pdi-discussion-cancel', this._onCancel);
@@ -197,7 +196,6 @@ class PdiDiscussion extends Base {
   _onBlur(e) {
     this.active = false;
     this.deleting = false;
-    
   }
 
   _onFocus() {
@@ -209,8 +207,8 @@ class PdiDiscussion extends Base {
   }
 
   _onPredelete(e) {
-     e.stopPropagation(); 
-     this.deleting = true; 
+     e.stopPropagation();
+     this.deleting = true;
   }
 
   _onCreate(e) {
@@ -240,7 +238,6 @@ class PdiDiscussion extends Base {
       this.parentNode.removeChild(this);
     }
   }
-  
 }
 
 // Register the new element with the browser.

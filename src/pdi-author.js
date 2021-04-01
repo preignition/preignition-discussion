@@ -1,19 +1,18 @@
 import { html, css } from 'lit-element';
 import { Base } from './base-class.js';
 // import TimeAgo from 'javascript-time-ago';
- 
+
 // // Load locale-specific relative date/time formatting rules.
 // import en from 'javascript-time-ago/locale/en/index.js'
- 
+
 // // Add locale-specific relative date/time formatting rules.
 // TimeAgo.addLocale(en)
- 
+
 // // Create relative date/time formatter.
 // const timeAgo = new TimeAgo('en-US')
- 
+
 
 class PdiAuthor extends Base {
-
   static get styles() {
     return css `
     :host {
@@ -65,7 +64,7 @@ class PdiAuthor extends Base {
         <div class="photo"><img src="${this.user.photoURL || this.defaultURL}" alt="${this.user.displayName}"></div>
         <div class="names-date">
           <div class="name">${this.user.displayName.length > 16 ? this.user.displayName.substring(0, 13) + ' ...' : this.user.displayName}</div>
-          <div class="date">${this.timestamp ? new Date(this.timestamp).toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' }) : '' }</div>
+          <div class="date">${this.timestamp ? new Date(this.timestamp).toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' }) : ''}</div>
         </div>
       </div>
     ` : '';
@@ -76,18 +75,17 @@ class PdiAuthor extends Base {
       ...super.properties,
 
       /*
-       * `id` 
+       * `id`
        */
       id: {
         type: String,
       },
 
       /*
-       * `defaultURL` 
+       * `defaultURL`
        */
       defaultURL: {
         type: String,
-        value: 'https://preignition.org/images/gravatar.png'
       },
 
       /*
@@ -95,12 +93,11 @@ class PdiAuthor extends Base {
        */
       type: {
         type: String,
-        value: 'comment',
         reflect: true
       },
 
       /*
-       * `uid` 
+       * `uid`
        */
       uid: {
         type: String,
@@ -119,9 +116,14 @@ class PdiAuthor extends Base {
       timestamp: {
         type: String,
       },
-    }
+    };
   }
 
+  constructor(){
+   super();
+   this.defaultURL =  'https://preignition.org/images/gravatar.png'
+   this.type = 'comment'
+  }
   updated(props) {
     if (props.has('uid')) {
       this.onUid(this.uid);
