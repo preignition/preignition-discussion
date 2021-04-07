@@ -132,7 +132,7 @@ class PdiComment extends Base {
         ${this.type === 'comment' ? this.resolveTemplate : nothing}
         <div class="tool ${this.solid ? 'solid' : ''}" style="position: relative;">
           <mwc-icon-button @click="${this.openMenu}" @focus="${e => e.stopPropagation()}" icon="more_vert" label="Open Menu"></mwc-icon-button>
-          <mwc-menu quick id="menu" @opened="${e => this.solid = true}" @closed="${e => this.solid = false}">
+          <mwc-menu id="menu" @opened="${e => this.solid = true}" @closed="${e => this.solid = false}">
             <mwc-list-item @click="${this.onEdit}">Edit</mwc-list-item>
             <mwc-list-item @click="${this.onDelete}">Delete</mwc-list-item>
           </mwc-menu>
