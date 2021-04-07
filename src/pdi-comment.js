@@ -9,6 +9,18 @@ import '@material/mwc-button';
 import '@material/mwc-menu';
 import '@material/mwc-list';
 
+const onKeyDownPropagation = (e) => {
+  const {code} = e;
+  const prevent = ['PageDown', 'PageUp', 'End', 'Home'];
+  if (prevent.indexOf(code) > -1) {
+    e.stopPropagation();
+    e.preventDefault();
+    const target = e.composedPath()[0];
+    const cursorPosition = (code === 'PageUp' || code === 'Home') ? 0 : target.textLength;
+    target.setSelectionRange(cursorPosition, cursorPosition);
+  }
+};
+
 
 class PdiComment extends Base {
   static get styles() {
@@ -86,13 +98,15 @@ class PdiComment extends Base {
     `];
   }
   render() {
+
     const isEditing = this.state === 'edit' || this.state === 'saving';
     return html `
       ${this.deleteTemplate}
       ${this.mainTemplate}
       <div class="body">
-        ${isEditing ? html `<textarea rows="1" .readOnly="${this.state === 'saving'}" @input="${this.onInput}" placeholder="${this.type === 'reply' ? 'Reply...' : ''}" .value="${this.body || ''}"></textarea>` : ''}
-        ${!isEditing ? html `<div id="parsed">${parse(this.body || '', {ADD_ATTR: ['target']})}</div>` : ''}
+        ${isEditing ? 
+          html `<textarea rows="1" @keydown=${onKeyDownPropagation} .readOnly="${this.state === 'saving'}" @input="${this.onInput}" placeholder="${this.type === 'reply' ? 'Reply...' : ''}" .value="${this.body || ''}"></textarea>` : 
+          html `<div id="parsed">${parse(this.body || '', {ADD_ATTR: ['target']})}</div>`}
       </div>
       ${this.state === 'edit' || !this.id ? html `
          <div class="tools">
